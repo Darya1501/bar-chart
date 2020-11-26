@@ -1,4 +1,5 @@
 package com.company;
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -28,13 +29,12 @@ public class panelOfButton extends JPanel{
 
     class ButtonEventListener implements ActionListener {
         public void actionPerformed (ActionEvent e) {
-            String message = "Представьте график!\n";
-            int firstValue = Integer.parseInt(firstInput.getText());
-            int secondValue = Integer.parseInt(secondInput.getText());
+            MyGUI.drawPanel.firstValue = Integer.parseInt(firstInput.getText());
+            MyGUI.drawPanel.secondValue = Integer.parseInt(secondInput.getText());
 
+            MyGUI.drawPanel.();
+            MyGUI.drawPanel.repaint();
 
-            message += "Первое: " + firstValue + ", второе: " + secondValue;
-            JOptionPane.showMessageDialog(null, message, "Output", JOptionPane.PLAIN_MESSAGE);
         }
     }
 

@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class MyGUI extends JFrame{
     panelOfButton leftPanel = new panelOfButton(); // Панель для элементов управления
-    panelOfChart drawPanel = new panelOfChart(); // Панель для графика
+    public static panelOfChart drawPanel = new panelOfChart(); // Панель для графика
 
 
     public MyGUI() {

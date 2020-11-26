@@ -1,6 +1,5 @@
 package com.company;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 public class panelOfChart extends JPanel {
@@ -8,7 +7,7 @@ public class panelOfChart extends JPanel {
     int userWidth = 370;
     int yAxisZero = userHeight-60;
 
-    int firstValue;
+    public static int firstValue, secondValue;
 
     private JLabel title = new JLabel("Введите значения: ");
 
@@ -25,14 +24,16 @@ public class panelOfChart extends JPanel {
         g.fillRect(120, 95, 30, 145);
         g.fillRect(160, 120, 30, 120);
 
+
         g.setColor(Color.orange);
-        g.fillRect(200, 120, 30, firstValue);
-        g.fillRect(240, 120, 30, panelOfButton.getValue(2));
+        g.fillRect(200, 240-firstValue, 30, firstValue);
+        g.fillRect(240, 240-secondValue, 30, secondValue);
+
     }
 
     public panelOfChart() {
         this.firstValue = panelOfButton.getValue(1);
-        repaint();
+
     }
 
 }
