@@ -1,12 +1,10 @@
 package com.company;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 public class MyGUI extends JFrame{
-    panelOfButton leftPanel = new panelOfButton(); // Панель для элементов управления
+    public static panelOfButton leftPanel = new panelOfButton(); // Панель для элементов управления
     public static panelOfChart drawPanel = new panelOfChart(); // Панель для графика
-
 
     public MyGUI() {
         super("Столбиковая процентная диаграмма по вертикали");

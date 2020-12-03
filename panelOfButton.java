@@ -1,49 +1,87 @@
 package com.company;
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.event.*;
+import java.util.ArrayList;
 
 public class panelOfButton extends JPanel{
+    JPanel input = new JPanel();
+    JScrollPane scrollPane = new JScrollPane(input);
+
+    ArrayList<JLabel> labels = new ArrayList<JLabel>();
+    ArrayList<JTextField> fields = new ArrayList<JTextField>();
+
     private JLabel title = new JLabel("Введите значения: ");
-    private JLabel firstLabel = new JLabel("1 значение: ");
+    private JLabel firstLabel = new JLabel("Значение 1: ");
     private JTextField firstInput = new JTextField("", 5);
-    private JLabel secondLabel = new JLabel("2 значение: ");
+    private JLabel secondLabel = new JLabel("Значение 2: ");
     private JTextField secondInput = new JTextField("", 5);
     private JButton buttonAdd = new JButton("+");
+    private JButton buttonRemove = new JButton("-");
     private JButton buttonBuild = new JButton("Построить");
 
-    public static int firstValue = 0;
-    public static int secondValue = 0;
-
     public panelOfButton() {
+        labels.add(firstLabel);
+        labels.add(secondLabel);
+        fields.add(firstInput);
+        fields.add(secondInput);
+
+        input.setLayout(new BoxLayout(input, BoxLayout.Y_AXIS));
         this.add(title);
-        this.add(firstLabel);
-        this.add(firstInput);
-        this.add(secondLabel);
-        this.add(secondInput);
+
+        input.add(labels.get(0));
+        input.add(fields.get(0));
+        input.add(labels.get(1));
+        input.add(fields.get(1));
+
+        this.add(scrollPane);
+
+        buttonAdd.addActionListener(new AddField());
         this.add(buttonAdd);
 
-        buttonBuild.addActionListener(new ButtonEventListener());
+        buttonRemove.addActionListener(new RemoveField());
+        this.add(buttonRemove);
+
+
+        buttonBuild.addActionListener(new DrawChart());
         this.add(buttonBuild);
     }
 
-    class ButtonEventListener implements ActionListener {
+    class AddField implements ActionListener {
         public void actionPerformed (ActionEvent e) {
-            MyGUI.drawPanel.firstValue = Integer.parseInt(firstInput.getText());
-            MyGUI.drawPanel.secondValue = Integer.parseInt(secondInput.getText());
-
-            MyGUI.drawPanel.();
-            MyGUI.drawPanel.repaint();
-
+            int number = labels.size() + 1;
+            JLabel label = new JLabel("Значение " + number + ": ");
+            labels.add(label);
+            JTextField field = new JTextField("", 5);
+            fields.add(field);
+            input.add(label);
+            input.add(field);
+            scrollPane.revalidate();
         }
     }
+    class RemoveField implements ActionListener {
+        public void actionPerformed (ActionEvent e) {
+            int number = labels.size() - 1;
+            JLabel label = labels.remove(number);
+            input.remove(label);
+            JTextField field = fields.remove(number);
+            input.remove(field);
 
-    public static int getValue(int i) {
-        switch (i) {
-            case 1: i = firstValue; break;
-            case 2: i = secondValue; break;
+            input.repaint();
+            scrollPane.revalidate();
         }
-        return i;
+    }
+    class DrawChart implements ActionListener {
+        public void actionPerformed (ActionEvent e) {
+            for (int i = 0; i < labels.size(); i++) {
+                MyGUI.drawPanel.values.add(Integer.parseInt(fields.get(i).getText()));
+            }
+
+            MyGUI.drawPanel.repaint();
+//            MyGUI.drawPanel.resize(501, 300);
+            setVisible(false);
+            setVisible(true);
+
+        }
     }
 }
 

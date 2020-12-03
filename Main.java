@@ -8,13 +8,3 @@ class Main {
 
     }
 }
-
-/*
-        GUI gui = new GUI();
-        gui.setVisible(true);
- */
-
-/*   из класса figure
-    JFrame.setDefaultLookAndFeelDecorated(true);
-     new JLayeredPaneTest();
- */
