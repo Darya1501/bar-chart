@@ -5,6 +5,5 @@ class Main {
     {
         MyGUI gui = new MyGUI();
         gui.setVisible(true);
-
     }
 }
