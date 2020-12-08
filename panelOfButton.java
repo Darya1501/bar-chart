@@ -19,9 +19,9 @@ public class panelOfButton extends JPanel{
 
     private final JLabel title2 = new JLabel("Введите значения: ");
     private final JLabel firstLabel = new JLabel("Значение 1: ");
-    private final JTextField firstInput = new JTextField("", 5);
+    private final JTextField firstInput = new JTextField("0", 5);
     private final JLabel secondLabel = new JLabel("Значение 2: ");
-    private final JTextField secondInput = new JTextField("", 5);
+    private final JTextField secondInput = new JTextField("0", 5);
     private final JButton buttonAdd = new JButton("+");
     private final JButton buttonRemove = new JButton("- ");
     private final JButton buttonBuild = new JButton("Построить");
@@ -69,6 +69,7 @@ public class panelOfButton extends JPanel{
 
     class DrawChart implements ActionListener {
         public void actionPerformed (ActionEvent e) {
+            MyGUI.drawPanel.k = 1;
             isBuilding = true;
             // удалить старые значения
             if (MyGUI.drawPanel.values.size() != 0) {
@@ -76,14 +77,14 @@ public class panelOfButton extends JPanel{
             }
 
             // Вычисляем величину 100%
-            if (radio1.isSelected()) {
-                int max = 0;
-                for (int i = 0; i < labels.size(); i++) {
-                    int a = Integer.parseInt(fields.get(i).getText());
-                    if(a > max) {
-                        max = a;
-                    }
+            int max = 0;
+            for (int i = 0; i < labels.size(); i++) {
+                int a = Integer.parseInt(fields.get(i).getText());
+                if(a > max) {
+                    max = a;
                 }
+            }
+            if (radio1.isSelected()) {
                 MyGUI.drawPanel.hundredValue = max;
             } else if (radio2.isSelected()) {
                 int sum = 0;
@@ -93,6 +94,7 @@ public class panelOfButton extends JPanel{
                 MyGUI.drawPanel.hundredValue = sum;
             } else {
                 MyGUI.drawPanel.hundredValue = Integer.parseInt(field1.getText());
+                MyGUI.drawPanel.maxValue = max;
             }
 
             // Передаем на панель диаграммы значения столбиков
@@ -113,7 +115,7 @@ public class panelOfButton extends JPanel{
                 int number = labels.size() + 1;
                 JLabel label = new JLabel("Значение " + number + ": ");
                 labels.add(label);
-                JTextField field = new JTextField("", 5);
+                JTextField field = new JTextField("0", 5);
                 fields.add(field);
                 input.add(label);
                 input.add(field);
